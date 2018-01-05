@@ -116,20 +116,8 @@ var TripleLiftAdapter = function TripleLiftAdapter() {
         bid.bidderCode = 'triplelift';
         bidmanager.addBidResponse(placementCode, bid);
       }
-
-      // run usersyncs
-      if (!usersync) {
-        var iframe = utils.createInvisibleIframe();
-        iframe.src = '//ib.3lift.com/sync';
-        try {
-          document.body.appendChild(iframe);
-        } catch (error) {
-          utils.logError(error);
-        }
-        usersync = true;
-        // suppress TL ad tag from running additional usersyncs
-        window._tlSyncDone = true;
-      }
+      // suppress TL ad tag from running additional usersyncs
+      window._tlSyncDone = true;
     } else {
       // no response data
       // @if NODE_ENV='debug'
@@ -139,8 +127,17 @@ var TripleLiftAdapter = function TripleLiftAdapter() {
   };
 
   return {
-    callBids: _callBids
-
+    callBids: _callBids,
+    getUserSyncs: function(syncOptions, serverResponses) {
+      const syncs = []
+      if (syncOptions.iframeEnabled) {
+         syncs.push({
+           type: 'iframe',
+           url: '//ib.3lift.com/sync'
+        });
+      }
+      return syncs;
+    }
   };
 };
 
