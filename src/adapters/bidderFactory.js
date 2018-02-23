@@ -133,6 +133,7 @@ export function registerBidder(spec) {
     : undefined;
   function putBidder(spec) {
     const bidder = newBidder(spec);
+    console.log(spec.code);
     adaptermanager.registerBidAdapter(bidder, spec.code, mediaTypes);
   }
 

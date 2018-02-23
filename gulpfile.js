@@ -220,11 +220,11 @@ gulp.task('watch', function () {
     'modules/**/*.js',
     'test/spec/**/*.js',
     '!test/spec/loaders/**/*.js'
-  ], ['lint', 'build-bundle-dev', 'test']);
+  ], ['build-bundle-dev', 'test']);
   gulp.watch([
     'loaders/**/*.js',
     'test/spec/loaders/**/*.js'
-  ], ['lint']);
+  ], []);
   connect.server({
     https: argv.https,
     port: port,

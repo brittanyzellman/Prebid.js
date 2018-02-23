@@ -3,9 +3,9 @@
   <!-- Prebid Config Section START -->
   <!-- Make sure this is inserted before your GPT tag -->
   <script> 
-    var PREBID_TIMEOUT = 3000;
+    var PREBID_TIMEOUT = 30000;
 
-    var headerBidTag0 = '/19968336/header-bid-tag-0';
+    var headerBidTag0 = '/22979003/brittany_wendy';
     var rightSlotSizes = [[300, 250], [300,600]];
 
     var adUnits = [{
@@ -13,17 +13,18 @@
         sizes: rightSlotSizes,
         bids: [{
             /*bidder: 'sekindo',
-            params: {
-               spaceId: 14071
+            params:    
+            spaceId: 14071
             }*/
             bidder: 'triplelift',
             params: {
-                inventoryCode: 'headerbidding_placement'
+                inventoryCode: 'sams_literary_novelties_300x250'
             }
         }]
     }];
 
     (function () {
+        // debugger;
         var d = document, pbs = d.createElement("script"), pro = d.location.protocal;
         pbs.type = "text/javascript";
         //pbs.src = 'http://10.17.20.67:9999/build/dev/prebid.js'
@@ -34,11 +35,15 @@
     })();
     
     var pbjs = pbjs || {};
+    console.log("pbjs: ", pbjs);
     pbjs.que = pbjs.que || [];
   </script>
   <!-- Prebid Config Section END -->
   
   <!-- Prebid Boilerplate Section START. No Need to Edit. -->
+<!-- 
+    <script type="text/javascript" src="//acdn.adnxs.com/prebid/not-for-prod/prebid.js" async></script> -->
+
   <script>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
@@ -65,6 +70,7 @@
     }
 
     setTimeout(function() {
+        console.log("seeing ad server request");
         sendAdserverRequest();
     }, PREBID_TIMEOUT);
 
@@ -88,10 +94,10 @@
     var globalslot = null;
     googletag.cmd.push(function () {
 
-        globalslot = googletag.defineSlot('/19968336/header-bid-tag-0', rightSlotSizes, 'div-1').addService(googletag.pubads());
-        var slot1 = googletag.defineSlot('/19968336/header-bid-tag-3', rightSlotSizes, 'div-2').addService(googletag.pubads());
+        globalslot = googletag.defineSlot('/22979003/brittany_wendy', rightSlotSizes, 'div-1').addService(googletag.pubads());
+        var slot1 = googletag.defineSlot('/22979003/prebid_test', rightSlotSizes, 'div-2').addService(googletag.pubads());
 
-        googletag.pubads().enableSingleRequest();
+        // googletag.pubads().enableSingleRequest();
         googletag.enableServices();
     });
   </script>
@@ -101,7 +107,7 @@
 
 <h2>Prebid.js TestCase1</h2>
 
-<!-- /19968336/pbjs-right1-300x250-300x600 -->
+<!-- /22979003/pbjs-right1-300x250-300x600 -->
 <div id='div-1'>
     <script type='text/javascript'>
         googletag.cmd.push(function() { googletag.display('div-1'); });

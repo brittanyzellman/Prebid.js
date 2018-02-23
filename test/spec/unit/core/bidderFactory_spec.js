@@ -29,6 +29,7 @@ const MOCK_BIDS_REQUEST = {
 }
 
 describe('bidders created by newBidder', () => {
+  debugger;
   let spec;
   let bidder;
   let addBidResponseStub;

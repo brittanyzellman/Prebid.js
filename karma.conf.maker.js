@@ -142,6 +142,14 @@ module.exports = function(codeCoverage, browserstack, watchMode, file) {
 
     reporters: ['progress'],
 
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--headless', '--remote-debugging=9222']
+      }
+    },
+
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: !watchMode,
