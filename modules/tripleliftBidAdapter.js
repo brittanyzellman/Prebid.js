@@ -93,10 +93,8 @@ export const spec = {
     var tlURI = '//tlx.3lift.com/header/auction?';
     var tlCall = document.location.protocol + tlURI;
 
-    tlCall = utils.tryAppendQueryString(tlCall, 'callback', '$$PREBID_GLOBAL$$.TLCB');
     tlCall = utils.tryAppendQueryString(tlCall, 'lib', 'prebid');
     tlCall = utils.tryAppendQueryString(tlCall, 'v', '$prebid.version$');
-    tlCall = utils.tryAppendQueryString(tlCall, 'callback_id', callbackId);
     tlCall = utils.tryAppendQueryString(tlCall, 'inv_code', inventoryCode);
     tlCall = utils.tryAppendQueryString(tlCall, 'floor', floor);
 
@@ -136,7 +134,6 @@ export const spec = {
    * @return {Bid[]} An array of bids which were nested inside the server.
    */
   interpretResponse: function(serverResponse, {bidderRequest}) {
-    debugger;
     serverResponse = serverResponse.body;
     const bids = [];
     if (!serverResponse || serverResponse.error) {
@@ -161,14 +158,14 @@ export const spec = {
     return bids;
   },
 
-  getUserSyncs: function(syncOptions) {
-    if (syncOptions.iframeEnabled) {
-      return [{
-        type: 'iframe',
-        url: '//acdn.adnxs.com/ib/static/usersync/v3/async_usersync.html'
-      }];
-    }
-  }
+//   getUserSyncs: function(syncOptions) {
+//     if (syncOptions.iframeEnabled) {
+//       return [{
+//         type: 'iframe',
+//         url: '//acdn.adnxs.com/ib/static/usersync/v3/async_usersync.html'
+//       }];
+//     }
+//   }
 }
 
 // these two are helper functions from old prebid adapter
@@ -188,56 +185,55 @@ function isFlashEnabled() {
   return hasFlash;
 }
 
-  $$PREBID_GLOBAL$$.TLCB = function(tlResponseObj) {
-    debugger;
-    if (tlResponseObj && tlResponseObj.callback_id) {
-      var bidObj = utils.getBidRequest(tlResponseObj.callback_id);
-      var placementCode = bidObj && bidObj.placementCode;
+  // $$PREBID_GLOBAL$$.TLCB = function(tlResponseObj) {
+  //   if (tlResponseObj && tlResponseObj.callback_id) {
+  //     var bidObj = utils.getBidRequest(tlResponseObj.callback_id);
+  //     var placementCode = bidObj && bidObj.placementCode;
 
-      // @if NODE_ENV='debug'
-      if (bidObj) { utils.logMessage('JSONP callback function called for inventory code: ' + bidObj.params.inventoryCode); }
-      // @endif
+  //     // @if NODE_ENV='debug'
+  //     if (bidObj) { utils.logMessage('JSONP callback function called for inventory code: ' + bidObj.params.inventoryCode); }
+  //     // @endif
 
-      var bid = [];
-      if (tlResponseObj && tlResponseObj.cpm && tlResponseObj.cpm !== 0) {
-        bid = bidfactory.createBid(1, bidObj);
-        bid.bidderCode = 'triplelift';
-        bid.cpm = tlResponseObj.cpm;
-        bid.ad = tlResponseObj.ad;
-        bid.width = tlResponseObj.width;
-        bid.height = tlResponseObj.height;
-        bid.dealId = tlResponseObj.deal_id;
-        bidmanager.addBidResponse(placementCode, bid);
-      } else {
-        // no response data
-        // @if NODE_ENV='debug'
-        if (bidObj) { utils.logMessage('No prebid response from TripleLift for inventory code: ' + bidObj.params.inventoryCode); }
-        // @endif
-        bid = bidfactory.createBid(2, bidObj);
-        bid.bidderCode = 'triplelift';
-        bidmanager.addBidResponse(placementCode, bid);
-      }
+  //     var bid = [];
+  //     if (tlResponseObj && tlResponseObj.cpm && tlResponseObj.cpm !== 0) {
+  //       bid = bidfactory.createBid(1, bidObj);
+  //       bid.bidderCode = 'triplelift';
+  //       bid.cpm = tlResponseObj.cpm;
+  //       bid.ad = tlResponseObj.ad;
+  //       bid.width = tlResponseObj.width;
+  //       bid.height = tlResponseObj.height;
+  //       bid.dealId = tlResponseObj.deal_id;
+  //       bidmanager.addBidResponse(placementCode, bid);
+  //     } else {
+  //       // no response data
+  //       // @if NODE_ENV='debug'
+  //       if (bidObj) { utils.logMessage('No prebid response from TripleLift for inventory code: ' + bidObj.params.inventoryCode); }
+  //       // @endif
+  //       bid = bidfactory.createBid(2, bidObj);
+  //       bid.bidderCode = 'triplelift';
+  //       bidmanager.addBidResponse(placementCode, bid);
+  //     }
 
-      // run usersyncs
-      if (!usersync) {
-        var iframe = utils.createInvisibleIframe();
-        iframe.src = '//ib.3lift.com/sync';
-        try {
-          document.body.appendChild(iframe);
-        } catch (error) {
-          utils.logError(error);
-        }
-        usersync = true;
-        // suppress TL ad tag from running additional usersyncs
-        window._tlSyncDone = true;
-      }
-    } else {
-      // no response data
-      // @if NODE_ENV='debug'
-      utils.logMessage('No prebid response for placement %%PLACEMENT%%');
-      // @endif
-    }
-  };
+  //     // run usersyncs
+  //     if (!usersync) {
+  //       var iframe = utils.createInvisibleIframe();
+  //       iframe.src = '//ib.3lift.com/sync';
+  //       try {
+  //         document.body.appendChild(iframe);
+  //       } catch (error) {
+  //         utils.logError(error);
+  //       }
+  //       usersync = true;
+  //       // suppress TL ad tag from running additional usersyncs
+  //       window._tlSyncDone = true;
+  //     }
+  //   } else {
+  //     // no response data
+  //     // @if NODE_ENV='debug'
+  //     utils.logMessage('No prebid response for placement %%PLACEMENT%%');
+  //     // @endif
+  //   }
+  // };
 
 
 function newRenderer(adUnitCode, rtbBid) {

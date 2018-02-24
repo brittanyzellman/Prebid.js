@@ -18,7 +18,7 @@
 
         var pbjs = pbjs || {};
         pbjs.que = pbjs.que  || [];
-        var PREBID_TIMEOUT = 3000;
+        var PREBID_TIMEOUT = 30000;
 
         pbjs.useSecureLoad = true;
 
@@ -60,7 +60,7 @@
         setTimeout(initAdserver, PREBID_TIMEOUT);
         //pbjs.ading = true;
         pbjs.que.push(function () {
-
+          debugger;
           // pbjs.setConfig({ enableSendAllBids: true });
 
             var A9Adaptor = function A9Adaptor() {
@@ -94,31 +94,37 @@
                 //code: rightDivId,
                 sizes: rightSlotSizes,
                 bids: [
-                  {
-                      bidder: 'appnexus',
-                      params: {
-                          placementId: '5626309'
-                      }
-                  },
-                  {
-                    bidder: 'sekindo',
-                      params: {
-                        spaceId: 14071 	// REQUIRED int. To get one, contact http://www.sekindo.com
-                      }
-                  },
-                  {
-                      bidder: 'indexExchange',
-                      params: {
-                        id: "1",
-                        siteID: 999990
-                      }
-                  },
-                  {
-                      bidder: 'sovrn',
-                      params: {
-                          tagid: "315045"
-                      }
+                {
+                  bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
                   }
+                }
+                  // {
+                  //     bidder: 'appnexus',
+                  //     params: {
+                  //         placementId: '5626309'
+                  //     }
+                  // },
+                  // {
+                  //   bidder: 'sekindo',
+                  //     params: {
+                  //       spaceId: 14071 	// REQUIRED int. To get one, contact http://www.sekindo.com
+                  //     }
+                  // },
+                  // {
+                  //     bidder: 'indexExchange',
+                  //     params: {
+                  //       id: "1",
+                  //       siteID: 999990
+                  //     }
+                  // },
+                  // {
+                  //     bidder: 'sovrn',
+                  //     params: {
+                  //         tagid: "315045"
+                  //     }
+                  // }
                 ]
             };
 
@@ -131,10 +137,10 @@
                 sizes: [[300, 250], [300,600]],
                 bids: [
                   {
-                    bidder: 'appnexus',
-                    params: {
-                        placementId : '4799418', //''6518787',
-                    }
+                    bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                  }
                   }
                 ]
             };
@@ -144,10 +150,10 @@
                 //code : topDivId,
                 sizes: [[300, 250], [300,600]],
                 bids: [{
-                    bidder: 'appnexus',
-                    params: {
-                        placementId : '949941', //''6518787',
-                    }
+                    bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                  }
                 }]
             };
 
@@ -156,10 +162,10 @@
                 //code : topDivId,
                 sizes: [[300, 250], [300,600]],
                 bids: [{
-                    bidder: 'appnexus',
-                    params: {
-                        placementId : '949941', //''6518787',
-                    }
+                    bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                  }
                 }]
             };
 
@@ -167,11 +173,12 @@
                 code: '/22979003/header-bid-tag-9',
                 //code : topDivId,
                 sizes: [[300, 250], [300,600]],
-                bids: [{
-                    bidder: 'appnexus',
-                    params: {
-                        placementId : '949941', //''6518787',
-                    }
+                bids: [
+                {
+                  bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                       }
                 }]
             };
 
@@ -180,14 +187,12 @@
                 //code : topDivId,
                 sizes: [[300, 250], [300,600]],
                 bids: [
-                  {
-                      bidder: 'sonobi',
-                      params: {
-                        ad_unit: '/7780971/sparks_prebid_MR',
-                        dom_id: 'div-gpt-ad-1462372786781-1'
-                      }
-                  }
-                ]
+                {
+                   bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                       }
+                }]
             };
 
             var adUnit11 = {
@@ -195,10 +200,10 @@
               sizes: [[300, 250], [300,600]],
               bids: [
                 {
-                  bidder: 'sovrn',
-                  params: {
-                    tagid: "315045"
-                  }
+                  bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                       }
                 }
               ]
             };
@@ -208,12 +213,10 @@
                 sizes: [[300, 250], [300,600]],
                 bids: [
                   {
-                    bidder: 'springserve',
-                    params: {
-                      impId: 1234,
-                      supplyPartnerId: 1,
-                      test: true // only include when testing
-                    }
+                    bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                       }
                   }
                 ]
             };
@@ -236,10 +239,9 @@
                 sizes: [[300, 250], [300,600]],
                 bids: [
                   {
-                    bidder: 'yieldbot',
-                    params: {
-                      pub: 'f82d',
-                      name: 'mobile_lb'
+                    bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
                   }
                 }
               ]
@@ -250,10 +252,10 @@
                 sizes: [[300, 250], [300,600]],
                 bids: [
                   {
-                    bidder: 'brightcom',
-                    params: {
-                        tagId: 16577 // Tag ID supplied by Brightcom - brightcom.com
-                    }
+                    bidder: 'triplelift',
+                       params: {
+                           inventoryCode: 'headerbidding_placement'
+                  }
                 }
               ]
             };
@@ -354,6 +356,7 @@
                   adserverTargeting: [{
                     key: "hb_bidder",
                     val: function (bidResponse) {
+                      debugger;
                       return bidResponse.bidderCode;
                     }
                   }, {
@@ -618,7 +621,6 @@
         googletag.cmd.push(function() { googletag.display('div-gpt-ad-1438287399331-0'); });
     </script>
 </div>
-
 <div id='div-gpt-ad-1438287399331-0'>
     <script type='text/javascript'>
         googletag.cmd.push(function() { googletag.display('div-gpt-ad-1438287399331-0'); });
@@ -676,16 +678,16 @@
         });
     }
 
-  pbjs.que.push(function () {
-    pbjs.enableAnalytics([
-      {
-        provider: 'appnexus',
-        options: {
-          global: 'AppNexusPrebidAnalytics'
-        }
-      }
-    ]);
-  });
+  // pbjs.que.push(function () {
+  //   pbjs.enableAnalytics([
+  //     {
+  //       provider: 'appnexus',
+  //       options: {
+  //         global: 'AppNexusPrebidAnalytics'
+  //       }
+  //     }
+  //   ]);
+  // });
 
 </script>
 
