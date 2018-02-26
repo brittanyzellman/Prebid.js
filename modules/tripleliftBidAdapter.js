@@ -51,41 +51,8 @@ export const spec = {
    * @return ServerRequest Info describing the request to the server.
    */
   buildRequests: function(bidRequests, bidderRequest) {
-    debugger;
-    // const tags = bidRequests.map(bidToTag);
-    // const userObjBid = find(bidRequests, hasUserInfo);
-    // let userObj;
-    // if (userObjBid) {
-    //   userObj = {};
-    //   Object.keys(userObjBid.params.user)
-    //     .filter(param => includes(USER_PARAMS, param))
-    //     .forEach(param => userObj[param] = userObjBid.params.user[param]);
-    // }
 
-    // const memberIdBid = find(bidRequests, hasMemberId);
-    // const member = memberIdBid ? parseInt(memberIdBid.params.member, 10) : 0;
-
-    // const payload = {
-    //   tags: [...tags],
-    //   user: userObj,
-    //   sdk: {
-    //     source: SOURCE,
-    //     version: '$prebid.version$'
-    //   }
-    // };
-    // if (member > 0) {
-    //   payload.member_id = member;
-    // }
-    // const payloadString = JSON.stringify(payload);
-    // return {
-    //   method: 'POST',
-    //   url: URL,
-    //   data: payloadString,
-    //   bidderRequest
-    // };
-
-    // determine tag params
-    // this will eveentually have to be a loop when implementing SRA???
+    // will this eveentually be a loop when implementing SRA???
     var inventoryCode = utils.getBidIdParameter('inventoryCode', bidRequests[0].params);
     var floor = utils.getBidIdParameter('floor', bidRequests[0].params);
 
@@ -157,18 +124,8 @@ export const spec = {
     }
     return bids;
   },
-
-//   getUserSyncs: function(syncOptions) {
-//     if (syncOptions.iframeEnabled) {
-//       return [{
-//         type: 'iframe',
-//         url: '//acdn.adnxs.com/ib/static/usersync/v3/async_usersync.html'
-//       }];
-//     }
-//   }
 }
 
-// these two are helper functions from old prebid adapter
 function isFlashEnabled() {
   var hasFlash = 0;
   try {
@@ -184,57 +141,6 @@ function isFlashEnabled() {
   }
   return hasFlash;
 }
-
-  // $$PREBID_GLOBAL$$.TLCB = function(tlResponseObj) {
-  //   if (tlResponseObj && tlResponseObj.callback_id) {
-  //     var bidObj = utils.getBidRequest(tlResponseObj.callback_id);
-  //     var placementCode = bidObj && bidObj.placementCode;
-
-  //     // @if NODE_ENV='debug'
-  //     if (bidObj) { utils.logMessage('JSONP callback function called for inventory code: ' + bidObj.params.inventoryCode); }
-  //     // @endif
-
-  //     var bid = [];
-  //     if (tlResponseObj && tlResponseObj.cpm && tlResponseObj.cpm !== 0) {
-  //       bid = bidfactory.createBid(1, bidObj);
-  //       bid.bidderCode = 'triplelift';
-  //       bid.cpm = tlResponseObj.cpm;
-  //       bid.ad = tlResponseObj.ad;
-  //       bid.width = tlResponseObj.width;
-  //       bid.height = tlResponseObj.height;
-  //       bid.dealId = tlResponseObj.deal_id;
-  //       bidmanager.addBidResponse(placementCode, bid);
-  //     } else {
-  //       // no response data
-  //       // @if NODE_ENV='debug'
-  //       if (bidObj) { utils.logMessage('No prebid response from TripleLift for inventory code: ' + bidObj.params.inventoryCode); }
-  //       // @endif
-  //       bid = bidfactory.createBid(2, bidObj);
-  //       bid.bidderCode = 'triplelift';
-  //       bidmanager.addBidResponse(placementCode, bid);
-  //     }
-
-  //     // run usersyncs
-  //     if (!usersync) {
-  //       var iframe = utils.createInvisibleIframe();
-  //       iframe.src = '//ib.3lift.com/sync';
-  //       try {
-  //         document.body.appendChild(iframe);
-  //       } catch (error) {
-  //         utils.logError(error);
-  //       }
-  //       usersync = true;
-  //       // suppress TL ad tag from running additional usersyncs
-  //       window._tlSyncDone = true;
-  //     }
-  //   } else {
-  //     // no response data
-  //     // @if NODE_ENV='debug'
-  //     utils.logMessage('No prebid response for placement %%PLACEMENT%%');
-  //     // @endif
-  //   }
-  // };
-
 
 function newRenderer(adUnitCode, rtbBid) {
   const renderer = Renderer.install({
